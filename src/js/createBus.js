@@ -37,7 +37,7 @@ function getInBetween(start, end, frames = 60) {
 
 function createBus(map, location) {
   const marker = leaflet.circleMarker(location, {
-    radius: 5,
+    radius: 4,
     stroke: false,
     fillColor: '#ffffff',
     fillOpacity: 1
