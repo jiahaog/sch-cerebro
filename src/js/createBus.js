@@ -3,38 +3,12 @@ import leaflet from 'leaflet';
 
 const FPS = 60;
 
-leaflet.Icon.Default.imagePath = 'img';
-
-const container = document.getElementById('mapid');
-
-const map = leaflet.map(container, {
-  center: [1.290270, 103.851959],
-  zoom: 13
-});
-
-const OSM_URL = 'https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png';
-const OSM_ATTR = 'Maps © <a href="http://www.thunderforest.com">Thunderforest</a>, Data © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>';
-leaflet.tileLayer(OSM_URL, {maxZoom: 18, attribution: OSM_ATTR}).addTo(map);
-//
-
-const marker = leaflet.circleMarker([1.290270, 103.851959], {
-  radius: 5,
-  stroke: false,
-  fillColor: '#ffffff',
-  fillOpacity: 1
-}).addTo(map);
-
-setTimeout(() => {
-  moveToLocation(marker, [1.290270, 103.9]);
-}, 2000);
-
 /**
- *
  * @param {leaflet.marker} marker
  * @param {Array} location
  * @param duration seconds
  */
-function moveToLocation(marker, location, duration = 10) {
+function moveToLocation(marker, location, duration = 1) {
   const current = marker.getLatLng();
 
   const currentArray = [current.lat, current.lng];
@@ -60,3 +34,21 @@ function getInBetween(start, end, frames = 60) {
   });
   return zip(final[0], final[1]);
 }
+
+function createBus(map, location) {
+  const marker = leaflet.circleMarker(location, {
+    radius: 5,
+    stroke: false,
+    fillColor: '#ffffff',
+    fillOpacity: 1
+  }).addTo(map);
+
+  return {
+    marker,
+    move(location) {
+      moveToLocation(marker, location);
+    }
+  }
+}
+
+export default createBus;
