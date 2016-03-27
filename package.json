@@ -1,6 +1,6 @@
 {
-  "name": "bus-map",
-  "version": "1.0.0",
+  "name": "my-bus-leh",
+  "version": "0.1.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -50,5 +50,21 @@
       "es2015"
     ]
   },
-  "description": ""
+  "description": "Location of Buses in Singapore. In Real Time.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiahaog/my-bus-leh.git"
+  },
+  "keywords": [
+    "bus",
+    "transport",
+    "location",
+    "map",
+    "web",
+    "app"
+  ],
+  "bugs": {
+    "url": "https://github.com/jiahaog/my-bus-leh/issues"
+  },
+  "homepage": "https://github.com/jiahaog/my-bus-leh#readme"
 }
