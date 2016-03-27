@@ -128,6 +128,7 @@ gulp.task('build', callback => {
 
 gulp.task('browserSync', () => {
     browserSync({
+        open: false,
         server: {
             baseDir: 'dist'
         },
