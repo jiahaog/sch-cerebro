@@ -11,7 +11,7 @@ function randomBus(map) {
   return createBus(map, randomLocation)
 }
 
-function createRandomBuses(map, number = 50) {
+function createRandomBuses(map, number = 1000) {
   for (let i = 0; i < number; i++) {
     const bus = randomBus(map);
     setInterval(() => {
