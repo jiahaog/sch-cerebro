@@ -1,9 +1,6 @@
-
 import leaflet from 'leaflet';
 
-
-
-leaflet.Icon.Default.imagePath = 'img';
+// leaflet.Icon.Default.imagePath = 'img';
 
 function createMap() {
   const container = document.getElementById('mapid');
