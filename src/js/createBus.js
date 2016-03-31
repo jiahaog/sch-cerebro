@@ -1,11 +1,11 @@
 import leaflet from 'leaflet';
 import {Actor, Tween} from 'popmotion';
 
-function createBus(map, location) {
+function createBus(map, location, color='#ffffff') {
   const marker = leaflet.circleMarker(location, {
     radius: 4,
     stroke: false,
-    fillColor: '#ffffff',
+    fillColor: color,
     fillOpacity: 1
   }).addTo(map);
 
@@ -29,10 +29,13 @@ function createBus(map, location) {
           lat: location[0],
           lng: location[1]
         },
-        duration: 1000,
+        duration: 10,
         ease: 'linear'
       });
       actor.start(tween);
+    },
+    remove() {
+      map.removeLayer(marker);
     }
   }
 }

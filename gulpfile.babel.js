@@ -123,7 +123,12 @@ gulp.task('favicon', () => {
 });
 
 gulp.task('build', callback => {
-    runSequence('clean', ['useref', 'js', 'img', 'svg', 'favicon'], callback);
+    runSequence('clean', ['useref', 'js', 'img', 'svg', 'favicon', 'data'], callback);
+});
+
+gulp.task('data', () => {
+  return gulp.src('src/data/**/*')
+    .pipe(gulp.dest('dist/data'));
 });
 
 gulp.task('browserSync', () => {
@@ -136,7 +141,7 @@ gulp.task('browserSync', () => {
     })
 });
 
-gulp.task('watch', ['browserSync', 'useref', 'img', 'svg', 'favicon'], () => {
+gulp.task('watch', ['browserSync', 'useref', 'img', 'svg', 'favicon', 'data'], () => {
     watchJs();
     gulp.watch('src/less/**/*.less', ['useref']);
     gulp.watch('src/**/*.html', ['useref']);
