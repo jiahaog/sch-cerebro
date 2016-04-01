@@ -1,21 +1,19 @@
-import moment from 'moment';
+import React from 'react';
 import createMap from './createMap';
 import createController from './createController';
 import test from './testBus';
 import reducer from './reducers';
 import {createStore} from 'redux';
-import {changeTime} from './actions';
+import {stepTime} from './actions';
 const bus2data = BUS_2_DATA;
-const busStops = BUS_STOPS;
 import { Provider } from 'react-redux';
-import React from 'react';
 import { render } from 'react-dom';
 import App from './components/app';
 
+const STEP_MINUTES = 1;
 
 const store = createStore(reducer);
 const map = createMap();
-test(map);
 
 const controller = createController(map, bus2data);
 
@@ -26,15 +24,25 @@ render(
   document.getElementById('root')
 );
 
+
+let interval;
 store.subscribe(() => {
   const newState = store.getState();
   controller.updateTime(newState.date);
+
+  if (newState.isPlayingBack) {
+
+    if (interval) {
+      return;
+    }
+
+    interval = setInterval(() => {
+      store.dispatch(stepTime());
+    }, STEP_MINUTES * 1000);
+  } else {
+    clearInterval(interval);
+    interval = null;
+  }
+
 });
-
-
-let counter = 0;
-setInterval(() => {
-  const newTime = moment(new Date('Thu Mar 31 2016 11:00:00 GMT+0800 (SGT)')).add(counter, 'm');
-  store.dispatch(changeTime(newTime));
-  counter += 1
-}, 1000);
+test(map);
