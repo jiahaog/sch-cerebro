@@ -1,6 +1,5 @@
 import {connect} from 'react-redux';
 import {changeTime} from './../actions'
-
 import slider from './../components/slider';
 
 function mapStateToProps(state) {
@@ -17,9 +16,9 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const changeDateSlider = connect(
+const sliderContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(slider);
 
-export default changeDateSlider;
+export default sliderContainer;
