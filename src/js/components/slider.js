@@ -13,7 +13,6 @@ function slider({currentDate, onChangeDate}) {
   function onChange(event) {
     const start = moment(START);
     start.add(event.target.value, 'm');
-    console.log(start);
     onChangeDate(start);
   }
 
