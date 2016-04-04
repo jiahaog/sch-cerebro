@@ -13,17 +13,17 @@ import App from './components/app';
 const STEP_MINUTES = 1;
 
 const store = createStore(reducer);
-const map = createMap();
 
-const controller = createController(map, bus2data);
 
 render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('app')
 );
 
+const map = createMap();
+const controller = createController(map, bus2data);
 
 let interval;
 store.subscribe(() => {

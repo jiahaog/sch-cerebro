@@ -56,10 +56,10 @@ gulp.task('js', () => {
     return compileJs();
 });
 
-// gulp.task('fonts', function() {
-//     return gulp.src('node_modules/font-awesome/fonts/*')
-//         .pipe(gulp.dest('dist/fonts'))
-// });
+gulp.task('fonts', function() {
+    return gulp.src('node_modules/font-awesome/fonts/*')
+        .pipe(gulp.dest('dist/fonts'))
+});
 
 gulp.task('useref', () => {
     return gulp.src('src/*.html')
@@ -123,7 +123,7 @@ gulp.task('favicon', () => {
 });
 
 gulp.task('build', callback => {
-    runSequence('clean', ['useref', 'js', 'img', 'svg', 'favicon', 'data'], callback);
+    runSequence('clean', ['useref', 'js', 'img', 'font', 'svg', 'favicon', 'data'], callback);
 });
 
 gulp.task('data', () => {
@@ -141,7 +141,7 @@ gulp.task('browserSync', () => {
     })
 });
 
-gulp.task('watch', ['browserSync', 'useref', 'img', 'svg', 'favicon', 'data'], () => {
+gulp.task('watch', ['browserSync', 'useref', 'fonts', 'img', 'svg', 'favicon', 'data'], () => {
     watchJs();
     gulp.watch('src/less/**/*.less', ['useref']);
     gulp.watch('src/**/*.html', ['useref']);

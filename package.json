@@ -10,6 +10,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "bulma": "0.0.17",
+    "font-awesome": "^4.5.0",
     "leaflet": "^0.7.7",
     "moment": "^2.12.0",
     "popmotion": "^4.3.4",

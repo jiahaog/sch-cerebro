@@ -1,10 +1,17 @@
 import React, {PropTypes} from 'react';
 
 function playButton({isPlayingBack, onClick}) {
+
+  let iconClass;
+  if (isPlayingBack) {
+    iconClass = 'fa fa-pause';
+  } else {
+    iconClass = 'fa fa-play';
+  }
+
   return (
-    <div>
-      <button onClick={onClick}>{isPlayingBack ? 'PAUSE' : 'PLAY'}</button>
-    </div>
+      <a className={`button is-primary ${iconClass}`} onClick={onClick}>
+      </a>
   );
 }
 
