@@ -27,17 +27,15 @@ function app() {
           <div id="mapid"></div>
         </div>
         <div className="container map-controls">
-          <div className="v-center">
-            <div className="columns">
-              <div className="column">
-                <DateSlider />
-              </div>
-              <div className="column">
-                <StepButton />
-              </div>
-              <div className="column">
-                <PlayButton />
-              </div>
+          <div className="columns v-center">
+            <div className="column">
+              <DateSlider />
+            </div>
+            <div className="column">
+              <StepButton />
+            </div>
+            <div className="column">
+              <PlayButton />
             </div>
           </div>
         </div>
@@ -47,4 +45,3 @@ function app() {
 }
 
 export default app;
-
