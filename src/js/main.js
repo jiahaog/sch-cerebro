@@ -43,6 +43,4 @@ store.subscribe(() => {
     clearInterval(interval);
     interval = null;
   }
-
 });
-test(map);
