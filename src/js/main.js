@@ -5,11 +5,11 @@ import test from './testBus';
 import reducer from './reducers';
 import {createStore} from 'redux';
 import {stepTime} from './actions';
-const bus2data = BUS_2_DATA;
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 import App from './components/app';
 
+const interpolatedBus2Data = INTERPOLATED_BUS_2;
 const STEP_MINUTES = 1;
 
 const store = createStore(reducer);
@@ -23,7 +23,7 @@ render(
 );
 
 const map = createMap();
-const controller = createController(map, bus2data);
+const controller = createController(map, interpolatedBus2Data);
 
 let interval;
 store.subscribe(() => {

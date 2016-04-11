@@ -2,7 +2,7 @@ import {CHANGE_TIME, STEP_TIME, TOGGLE_PLAYBACK} from './../actions';
 import moment from 'moment';
 
 const INITIAL_STATE = {
-  date: moment(new Date('Thu Mar 31 2016 11:00:00 GMT+0800 (SGT)')),
+  date: moment(new Date('2016-04-04T10:00:00.000Z')),
   isPlayingBack: false
 };
 

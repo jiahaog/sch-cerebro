@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
 import moment from 'moment';
 
-const START = moment(new Date('Thu Mar 31 2016 11:00:00 GMT+0800 (SGT)'));
+const START = moment(new Date('2016-04-04T10:00:00.000Z'));
+const SLIDER_RANGE_MINUTES = 60;
 
 function dateStringToValue(currentDate) {
   const startSeconds = START.unix();
@@ -20,7 +21,7 @@ function slider({currentDate, onChangeDate}) {
 
   return (
     <div>
-      <input min="0" max="60" step="1" type="range" value={currentDateValue} onChange={onChange.bind(null)}/>
+      <input min="0" max={SLIDER_RANGE_MINUTES} step="1" type="range" value={currentDateValue} onChange={onChange.bind(null)}/>
     </div>
   );
 }

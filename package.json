@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "gulp watch",
-    "build": "gulp build"
+    "build": "gulp build",
+    "doctor": "babel-doctor"
   },
   "author": "",
   "license": "MIT",
@@ -13,6 +14,7 @@
     "bulma": "0.0.17",
     "font-awesome": "^4.5.0",
     "leaflet": "^0.7.7",
+    "lodash": "^4.8.2",
     "moment": "^2.12.0",
     "popmotion": "^4.3.4",
     "react": "^0.14.8",
