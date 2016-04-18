@@ -10,7 +10,7 @@ function createMap() {
     zoom: 13
   });
 
-  const OSM_URL = 'https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png';
+  const OSM_URL = 'https://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png';
   const OSM_ATTR = 'Maps © <a href="http://www.thunderforest.com">Thunderforest</a>, Data © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>';
   leaflet.tileLayer(OSM_URL, {maxZoom: 18, attribution: OSM_ATTR}).addTo(map);
   return map
