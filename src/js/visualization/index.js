@@ -1,6 +1,6 @@
 import createMap from './createMap';
 import createController from './createController';
-import {stepTime} from './../actions';
+import {stepTimeForward} from './../actions';
 import interpolate from './../interpolation';
 import {bus2Data, busStops} from './../data';
 
@@ -24,7 +24,7 @@ function visualization(store) {
       }
 
       interval = setInterval(() => {
-        store.dispatch(stepTime());
+        store.dispatch(stepTimeForward());
       }, STEP_MINUTES * 1000);
     } else {
       clearInterval(interval);
