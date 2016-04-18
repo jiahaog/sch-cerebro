@@ -13,6 +13,7 @@
   "dependencies": {
     "bulma": "0.0.17",
     "font-awesome": "^4.5.0",
+    "geolib": "^2.0.20",
     "leaflet": "^0.7.7",
     "lodash": "^4.8.2",
     "moment": "^2.12.0",
