@@ -1,15 +1,17 @@
 import leaflet from 'leaflet';
 import {Actor, Tween} from 'popmotion';
 
-function createMarker(map, location, title, color='#ffffff') {
+function createMarker(map, location, title, color='#000000') {
   const marker = leaflet.circleMarker(location, {
     radius: 4,
     stroke: false,
     fillColor: color,
-    fillOpacity: 1,
-    title
+    fillOpacity: 0,
+    title,
+
   }).addTo(map);
 
+  marker.bindPopup(title);
 
   const actor = new Actor({
     values: {
@@ -25,6 +27,9 @@ function createMarker(map, location, title, color='#ffffff') {
     marker,
     actor,
     move(location) {
+      marker.setStyle({
+        fillOpacity: 1
+      });
       const tween = new Tween({
         values: {
           lat: location[0],
