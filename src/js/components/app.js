@@ -1,7 +1,8 @@
 import React from 'react';
 import DateSlider from '../containers/sliderContainer';
 import TimeDisplay from '../containers/TimeDisplayContainer';
-import StepButton from './../containers/stepButtonContainer';
+import StepForwardButton from './../containers/stepForwardButtonContainer';
+import StepBackwardButton from './../containers/stepBackwardButtonContainer';
 import PlayButton from './../containers/playButtonContainer';
 
 function app() {
@@ -32,7 +33,10 @@ function app() {
               <DateSlider />
             </div>
             <div className="column">
-              <StepButton />
+              <StepBackwardButton />
+            </div>
+            <div className="column">
+              <StepForwardButton />
             </div>
             <div className="column">
               <PlayButton />

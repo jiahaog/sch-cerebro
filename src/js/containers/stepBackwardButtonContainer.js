@@ -1,12 +1,12 @@
 import {connect} from 'react-redux';
-import {stepTime} from './../actions'
-import stepButton from './../components/stepButton';
+import {stepTimeBackward} from './../actions'
+import stepButton from './../components/stepBackwardButton';
 
 
 function mapDispatchToProps(dispatch) {
   return {
     onClick: () => {
-      dispatch(stepTime());
+      dispatch(stepTimeBackward());
     }
   }
 }
@@ -16,4 +16,4 @@ const stepButtonContainer = connect(
   mapDispatchToProps
 )(stepButton);
 
-export default stepButtonContainer;
+export default stepButtonContainer; 

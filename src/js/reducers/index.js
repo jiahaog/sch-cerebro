@@ -1,4 +1,4 @@
-import {CHANGE_TIME, STEP_TIME, TOGGLE_PLAYBACK} from './../actions';
+import {CHANGE_TIME, STEP_TIME_FORWARD, STEP_TIME_BACKWARD, TOGGLE_PLAYBACK} from './../actions';
 import moment from 'moment';
 
 const INITIAL_STATE = {
@@ -6,9 +6,13 @@ const INITIAL_STATE = {
   isPlayingBack: false
 };
 
-function nextTimeStep(currentDate) {
+function timeStep(currentDate, forward) {
   const currentMoment = moment(currentDate);
-  currentMoment.add(1, 'm');
+  if (forward) {
+    currentMoment.add(1, 'm');
+  } else {
+    currentMoment.subtract(1, 'm');
+  }
   return currentMoment;
 }
 
@@ -18,9 +22,13 @@ function reducer(state = INITIAL_STATE, action) {
       return Object.assign({}, state, {
         date: action.payload
       });
-    case STEP_TIME:
+    case STEP_TIME_FORWARD:
       return Object.assign({}, state, {
-        date: nextTimeStep(state.date)
+        date: timeStep(state.date, true)
+      });
+    case STEP_TIME_BACKWARD:
+      return Object.assign({}, state, {
+        date: timeStep(state.date, false)
       });
     case TOGGLE_PLAYBACK:
       return Object.assign({}, state, {
