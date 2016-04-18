@@ -1,4 +1,4 @@
-import createBus from './createBus';
+import createBus from './visualization/createBus';
 
 const bus2Route = BUS_2_ROUTE;
 
