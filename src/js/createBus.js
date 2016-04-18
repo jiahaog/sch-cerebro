@@ -6,22 +6,22 @@ import _ from 'lodash';
  * Checks if: rangeUpper - 1 min < inp < rangeUpper
  *
  * @param inp {string} 'Thu Mar 31 2016 11:00:00 GMT+0800 (SGT)'
- * @param rangeUpper {string}
+ * @param checkRange {string}
  * @returns {boolean}
  */
-function timeInRange(inp, rangeUpper) {
+function timeInRange(inp, checkRange) {
   // todo new Date() is not consistent across browsers https://github.com/moment/moment/issues/1407
-  const START = moment(new Date(rangeUpper)).subtract(1, 'm');
-  const end = moment(new Date(rangeUpper));
-  return moment(new Date(inp)).isBetween(START, end);
+  const start = moment(new Date(checkRange)).subtract(0.5, 'm');
+  const end = moment(new Date(checkRange)).add(0.5, 'm');
+  return moment(new Date(inp)).isBetween(start, end);
 }
 
 function createBus(map, data) {
+
   const prototype = {
     updateTime(newTime) {
 
       // find time in range
-
 
       const correspondingFrame = _.find(this.frames, element => {
         return timeInRange(element.date, newTime);
@@ -30,6 +30,7 @@ function createBus(map, data) {
       if (!correspondingFrame) {
         if (this.marker) {
           this.marker.remove();
+          this.marker = null;
           return;
         }
         return;
@@ -38,11 +39,7 @@ function createBus(map, data) {
       const locationArray = [correspondingFrame.lat, correspondingFrame.lng];
 
       if (this.marker) {
-        if (this.marker.removed) {
-          this.marker = createMarker(map, locationArray, data.markerId);
-        } else {
-          this.marker.move(locationArray);
-        }
+        this.marker.move(locationArray);
       } else {
         this.marker = createMarker(map, locationArray, data.markerId);
       }
@@ -55,7 +52,6 @@ function createBus(map, data) {
     frames: data.frames,
     marker: null
   };
-
   return Object.assign(instance, instanceProps);
 }
 
