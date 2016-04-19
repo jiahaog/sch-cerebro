@@ -1,13 +1,45 @@
 import {bus2Route} from './../data';
 import geolib from 'geolib';
 import findIndex from 'lodash/findIndex';
+import zip from 'lodash/zip';
 import memoize from 'lodash/memoize';
 
 const SEARCH_DISTANCE_THRESHOLD = 100;
+const STEP_DURATION = 1000;
+
+function calculateRouteTimings(routeParts, totalDuration) {
+
+  // if there's only one element, the first element of the timings should simply be the
+  // total duration
+  if (routeParts.length === 1) {
+    return [totalDuration];
+  }
+
+  const distances = routeParts.map((currentLocation, index) => {
+    // shift the marker to the first point immediately
+    if (index === 0) {
+      return 0;
+    }
+    const previousLocation = routeParts[index - 1];
+
+    return geolib.getDistance(
+      {latitude: currentLocation[0], longitude: currentLocation[1]},
+      {latitude: previousLocation[0], longitude: previousLocation[1]}
+    );
+  });
+
+  const totalDistance = distances.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue
+  }, 0);
+
+  return distances.map(distance => {
+    return totalDuration / totalDistance * distance
+  });
+}
 
 function createRoute() {
   const prototype = {
-    _subroute(start,end) {
+    subroute(start,end) {
       // assumes that this.data route is provided in order of the route
 
       const indexes = [start, end].map(referenceLocation => {
@@ -27,8 +59,18 @@ function createRoute() {
       // add one to be inclusive
       return this.data.slice(indexes[0], indexes[1] + 1);
     },
-    subroute(start, end) {
-      return memoize(this._subroute).call(this, start, end);
+    _subrouteWithTiming(start, end) {
+      const subroute = this.subroute(start, end);
+      const timings = calculateRouteTimings(subroute, STEP_DURATION);
+      return zip(subroute, timings).map(element => {
+        return {
+          location: element[0],
+          duration: element[1]
+        }
+      });
+    },
+    subrouteWithTiming(start, end) {
+      return memoize(this._subrouteWithTiming).call(this, start, end);
     }
   };
 

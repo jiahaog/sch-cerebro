@@ -1,7 +1,6 @@
 import leaflet from 'leaflet';
 import eachSeries from 'async/eachSeries';
 import {Actor, Tween} from 'popmotion';
-import zip from 'lodash/zip';
 
 const MARKER_APPEARANCE = {
   strokeColor: '#2ca25f',
@@ -42,12 +41,11 @@ function createMarker(map, location, title, route) {
       });
 
       const currentLocation = marker.getLatLng();
-      const routeParts = route.subroute([currentLocation.lat, currentLocation.lng], nextLocation);
-      const routeTimings = calculateRouteTimings(routeParts, 1000);
+      const routeParts = route.subrouteWithTiming([currentLocation.lat, currentLocation.lng], nextLocation);
 
-      eachSeries(zip(routeParts, routeTimings), (element, callback) => {
-        const point = element[0];
-        const timing = element[1];
+      eachSeries(routeParts, (element, callback) => {
+        const point = element.location;
+        const timing = element.duration;
         const tween = new Tween({
           values: {
             lat: point[0],
@@ -70,36 +68,3 @@ function createMarker(map, location, title, route) {
 }
 
 export default createMarker;
-
-
-import geolib from 'geolib';
-function calculateRouteTimings(routeParts, totalDuration) {
-
-  // if there's only one element, the first element of the timings should simply be the
-  // total duration
-  if (routeParts.length === 1) {
-    return [totalDuration];
-  }
-
-  const distances = routeParts.map((currentLocation, index) => {
-    // shift the marker to the first point immediately
-    if (index === 0) {
-      return 0;
-    }
-    const previousLocation = routeParts[index - 1];
-
-    return geolib.getDistance(
-      {latitude: currentLocation[0], longitude: currentLocation[1]},
-      {latitude: previousLocation[0], longitude: previousLocation[1]}
-    );
-  });
-
-  const totalDistance = distances.reduce((previousValue, currentValue) => {
-    return previousValue + currentValue
-  }, 0);
-
-  return distances.map(distance => {
-    return totalDuration / totalDistance * distance
-  });
-
-}
