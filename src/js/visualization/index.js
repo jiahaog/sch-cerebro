@@ -10,8 +10,12 @@ function visualization(store) {
   const interpolatedBus2Data = interpolate(bus2Data, busStops);
 
   const map = createMap();
-  const controller = createController(map, interpolatedBus2Data);
 
+  const startTime = store.getState().date;
+
+  const controller = createController(map, interpolatedBus2Data);
+  controller.updateTime(startTime);
+  
   let interval;
   store.subscribe(() => {
     const newState = store.getState();
