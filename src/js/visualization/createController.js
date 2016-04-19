@@ -1,4 +1,5 @@
 import createBus from './createBus';
+import createRoute from './createRoute';
 
 function createController(map, dataSet) {
   const controllerPrototype = {
@@ -6,12 +7,14 @@ function createController(map, dataSet) {
       this.buses.forEach(bus => bus.updateTime(newTime));
     }
   };
-  
+
   const controller = Object.create(controllerPrototype);
 
-  const buses = dataSet.map(data => {
-    return createBus(map, data);
-  });
+  const route = createRoute();
+  const buses = dataSet
+    .map(data => {
+      return createBus(map, data, route);
+    });
 
   const controllerProps = {
     buses

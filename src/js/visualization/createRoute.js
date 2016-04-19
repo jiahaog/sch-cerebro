@@ -1,13 +1,13 @@
 import {bus2Route} from './../data';
 import geolib from 'geolib';
 import findIndex from 'lodash/findIndex';
+import memoize from 'lodash/memoize';
 
-const SEARCH_DISTANCE_THRESHOLD = 20;
+const SEARCH_DISTANCE_THRESHOLD = 100;
 
 function createRoute() {
   const prototype = {
-    subroute(start,end) {
-
+    _subroute(start,end) {
       // assumes that this.data route is provided in order of the route
 
       const indexes = [start, end].map(referenceLocation => {
@@ -26,6 +26,9 @@ function createRoute() {
       }
       // add one to be inclusive
       return this.data.slice(indexes[0], indexes[1] + 1);
+    },
+    subroute(start, end) {
+      return memoize(this._subroute).call(this, start, end);
     }
   };
 

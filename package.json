@@ -11,6 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "async": "^2.0.0-rc.3",
     "bulma": "0.0.17",
     "font-awesome": "^4.5.0",
     "geolib": "^2.0.20",

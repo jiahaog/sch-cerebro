@@ -16,7 +16,7 @@ function timeInRange(inp, checkRange) {
   return moment(new Date(inp)).isBetween(start, end);
 }
 
-function createBus(map, data) {
+function createBus(map, data, route) {
 
   const prototype = {
     updateTime(newTime) {
@@ -41,7 +41,7 @@ function createBus(map, data) {
       if (this.marker) {
         this.marker.move(locationArray);
       } else {
-        this.marker = createMarker(map, locationArray, data.markerId);
+        this.marker = createMarker(map, locationArray, data.markerId, route);
       }
     }
   };
