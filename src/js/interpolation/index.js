@@ -206,10 +206,23 @@ function tagDataSet(dataSet, busStopLocations, startDate, endDate) {
   return result;
 }
 
+/**
+ * Changes the latitude and longitude strings to float
+ */
+function cleanUpData(dataSet) {
+  return dataSet.map(data => {
+    const copy = Object.assign({}, data);
+    copy.Latitude = parseFloat(copy.Latitude);
+    copy.Longitude = parseFloat(copy.Longitude);
+    return copy;
+  });
+}
+
 function main(dataSet, busStops) {
   const busStopLocations = indexBusStopLocations(busStops);
 
-  const taggedData = tagDataSet(dataSet, busStopLocations, START_DATE, END_DATE);
+  const cleanedData = cleanUpData(dataSet);
+  const taggedData = tagDataSet(cleanedData, busStopLocations, START_DATE, END_DATE);
 
   return dataByMarker(taggedData);
 }
