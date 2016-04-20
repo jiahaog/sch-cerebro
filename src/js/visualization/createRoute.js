@@ -5,9 +5,7 @@ import zip from 'lodash/zip';
 import union from 'lodash/union';
 import memoize from 'lodash/memoize';
 import leaflet from 'leaflet';
-
-const SEARCH_DISTANCE_THRESHOLD = 200;
-const STEP_DURATION = 1000;
+import {TIME_STEP_MINUTES, ROUTE_SEARCH_THRESHOLD} from './../config';
 
 function calculateRouteTimings(routeParts, totalDuration) {
 
@@ -50,7 +48,7 @@ function createRoute() {
               {latitude: referenceLocation[0], longitude: referenceLocation[1]},
               {latitude: searchLocation[0], longitude: searchLocation[1]}
             );
-          return distanceFromSearch < SEARCH_DISTANCE_THRESHOLD;
+          return distanceFromSearch < ROUTE_SEARCH_THRESHOLD;
         });
       });
 
@@ -63,7 +61,7 @@ function createRoute() {
     },
     _subrouteWithTiming(start, end) {
       const subroute = this.subroute(start, end);
-      const timings = calculateRouteTimings(subroute, STEP_DURATION);
+      const timings = calculateRouteTimings(subroute, TIME_STEP_MINUTES * 1000);
       return zip(subroute, timings).map(element => {
         return {
           location: element[0],

@@ -1,16 +1,12 @@
 import moment from 'moment';
 import _ from 'lodash';
+import {START_DATE, END_DATE, TIME_STEP_MINUTES} from './../config';
 
-const START_DATE = new Date('2016-04-04T10:00:00.000Z');
-const END_DATE = new Date('2016-04-04T11:00:00.000Z');
-const TIME_STEP_MINUTES = 1;
+const startDate = new Date(START_DATE);
+const endDate = new Date(END_DATE);
 
 function timeInRange(inp, lower, upper) {
   return moment(new Date(inp)).isBetween(moment(lower), moment(upper));
-}
-
-function prettyPrint(obj) {
-  console.log(JSON.stringify(obj, null, 2));
 }
 
 let idCounter = 0;
@@ -222,7 +218,7 @@ function main(dataSet, busStops) {
   const busStopLocations = indexBusStopLocations(busStops);
 
   const cleanedData = cleanUpData(dataSet);
-  const taggedData = tagDataSet(cleanedData, busStopLocations, START_DATE, END_DATE);
+  const taggedData = tagDataSet(cleanedData, busStopLocations, startDate, endDate);
 
   return dataByMarker(taggedData);
 }

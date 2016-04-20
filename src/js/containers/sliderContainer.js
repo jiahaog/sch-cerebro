@@ -4,7 +4,8 @@ import slider from './../components/slider';
 
 function mapStateToProps(state) {
   return {
-    currentDate: state.date
+    currentDate: state.date,
+    startDate: state.startDate
   }
 }
 

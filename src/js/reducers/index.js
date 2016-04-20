@@ -1,8 +1,10 @@
 import {CHANGE_TIME, STEP_TIME_FORWARD, STEP_TIME_BACKWARD, TOGGLE_PLAYBACK} from './../actions';
+import {START_DATE} from './../config';
 import moment from 'moment';
 
 const INITIAL_STATE = {
-  date: moment(new Date('2016-04-04T10:00:00.000Z')),
+  startDate: moment(new Date(START_DATE)),
+  date: moment(new Date(START_DATE)),
   isPlayingBack: false
 };
 
