@@ -11,6 +11,7 @@ function createController(map, dataSet) {
   const controller = Object.create(controllerPrototype);
 
   const route = createRoute();
+  route.draw(map);
   const buses = dataSet
     .map(data => {
       return createBus(map, data, route);

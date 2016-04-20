@@ -1,10 +1,12 @@
-import {bus2Route} from './../data';
+import {bus2Line} from './../data';
 import geolib from 'geolib';
 import findIndex from 'lodash/findIndex';
 import zip from 'lodash/zip';
+import union from 'lodash/union';
 import memoize from 'lodash/memoize';
+import leaflet from 'leaflet';
 
-const SEARCH_DISTANCE_THRESHOLD = 100;
+const SEARCH_DISTANCE_THRESHOLD = 200;
 const STEP_DURATION = 1000;
 
 function calculateRouteTimings(routeParts, totalDuration) {
@@ -43,7 +45,7 @@ function createRoute() {
       // assumes that this.data route is provided in order of the route
 
       const indexes = [start, end].map(referenceLocation => {
-        return findIndex(this.data, searchLocation => {
+        return findIndex(this.routePoints, searchLocation => {
           const distanceFromSearch =  geolib.getDistance(
               {latitude: referenceLocation[0], longitude: referenceLocation[1]},
               {latitude: searchLocation[0], longitude: searchLocation[1]}
@@ -57,7 +59,7 @@ function createRoute() {
         indexes.reverse();
       }
       // add one to be inclusive
-      return this.data.slice(indexes[0], indexes[1] + 1);
+      return this.routePoints.slice(indexes[0], indexes[1] + 1);
     },
     _subrouteWithTiming(start, end) {
       const subroute = this.subroute(start, end);
@@ -69,14 +71,22 @@ function createRoute() {
         }
       });
     },
+    
     subrouteWithTiming(start, end) {
       return memoize(this._subrouteWithTiming).call(this, start, end);
+    },
+    
+    draw(map) {
+      const lines = zip(bus2Line, ['red', 'blue']);
+      lines.forEach(([route, color]) => {
+        leaflet.polyline(route, {color}).addTo(map);
+      });
     }
   };
 
   const instance = Object.create(prototype);
   const instanceProps = {
-    data: bus2Route
+    routePoints: union(bus2Line[0], bus2Line[1])
   };
   return Object.assign(instance, instanceProps);
 }
