@@ -10,8 +10,9 @@ function createMap() {
     zoom: 13
   });
 
-  const OSM_URL = 'https://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png';
-  const OSM_ATTR = 'Maps © <a href="http://www.thunderforest.com">Thunderforest</a>, Data © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>';
+  const MAPBOX_TOKEN = 'pk.eyJ1IjoiamlhaGFvZyIsImEiOiJjaW02am8wYzAwMmQzdWJtNDkxZ2loY3h4In0.bQweoZxjHwlmx9cZXVQJAA';
+  const OSM_URL = `https://api.mapbox.com/styles/v1/mapbox/light-v8/tiles/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`;
+  const OSM_ATTR = `© <a href='https://www.mapbox.com/map-feedback/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>`;
   leaflet.tileLayer(OSM_URL, {maxZoom: 18, attribution: OSM_ATTR}).addTo(map);
   return map
 }
