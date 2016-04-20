@@ -1,25 +1,35 @@
-import leaflet from 'leaflet';
 import eachSeries from 'async/eachSeries';
+import {latLngToGeoJsonObject, latLngToGeoJsonPoint} from './../helpers'
 import {Actor, Tween} from 'popmotion';
 
 const MARKER_APPEARANCE = {
   strokeColor: '#2ca25f',
   strokeWeight: 3,
-  fillColor: '#e5f5f9',
-  radius: 6
+  fillColor: '#4CAF50',
+  radius: 8
 };
 
-function createMarker(map, location, title, route) {
-  const marker = leaflet.circleMarker(location, {
-    radius: MARKER_APPEARANCE.radius,
-    color: MARKER_APPEARANCE.strokeColor,
-    weight: MARKER_APPEARANCE.strokeWeight,
-    opacity: 0,
-    fillColor: MARKER_APPEARANCE.fillColor,
-    fillOpacity: 0
-  }).addTo(map);
+function createMarker(map, location, id) {
 
-  marker.bindPopup(title);
+  const sourceId = `busSource${id}`;
+  const layerId = `busId${id}`;
+  map.addSource(sourceId, latLngToGeoJsonObject(location));
+
+  map.addLayer({
+    id: layerId,
+    source: sourceId,
+    type: 'circle',
+    layout: {
+      visibility: 'none'
+    },
+    paint: {
+      'circle-radius': MARKER_APPEARANCE.radius,
+      'circle-color': MARKER_APPEARANCE.fillColor,
+      'circle-opacity': 0.7
+    }
+  });
+
+  let removed = false;
 
   const actor = new Actor({
     values: {
@@ -27,44 +37,61 @@ function createMarker(map, location, title, route) {
       lng: location[1]
     },
     onUpdate(output) {
-      marker.setLatLng([output.lat, output.lng]);
+      if (removed) {
+        // prevents undefined errors if the layer has been removed
+        return;
+      }
+      const latLngToUpdate = [output.lat, output.lng];
+      map.getSource(sourceId).setData(latLngToGeoJsonPoint(latLngToUpdate))
     }
   });
 
-  return {
-    marker,
-    actor,
+  const prototype = {
     move(nextLocation) {
-      marker.setStyle({
-        fillOpacity: 1,
-        opacity: 1
-      });
+      if (removed) {
+        return;
+      }
+      map.setLayoutProperty(layerId, 'visibility', 'visible');
 
-      const currentLocation = marker.getLatLng();
-      const routeParts = route.subrouteWithTiming([currentLocation.lat, currentLocation.lng], nextLocation);
-
-      eachSeries(routeParts, (element, callback) => {
-        const point = element.location;
-        const timing = element.duration;
-        const tween = new Tween({
-          values: {
-            lat: point[0],
-            lng: point[1]
-          },
-          duration: timing,
-          ease: 'linear'
-        });
-        tween.onComplete = () => {
-          callback();
-        };
-        actor.start(tween);
+      const tween = new Tween({
+        values: {
+          lat: nextLocation[0],
+          lng: nextLocation[1]
+        },
+        duration: 1000,
+        ease: 'linear'
       });
+      actor.start(tween);
+
+      // const currentLocation = marker.getLatLng();
+      // const routeParts = route.subrouteWithTiming([currentLocation.lat, currentLocation.lng], nextLocation);
+      //
+      // eachSeries(routeParts, (element, callback) => {
+      //   const point = element.location;
+      //   const timing = element.duration;
+      //   const tween = new Tween({
+      //     values: {
+      //       lat: point[0],
+      //       lng: point[1]
+      //     },
+      //     duration: timing,
+      //     ease: 'linear'
+      //   });
+      //   tween.onComplete = () => {
+      //     callback();
+      //   };
+      //   actor.start(tween);
+      // });
     },
 
     remove() {
-      map.removeLayer(marker);
+      map.removeLayer(layerId);
+      map.removeSource(sourceId);
+      removed = true;
     }
-  }
+  };
+
+  return Object.create(prototype);
 }
 
 export default createMarker;

@@ -16,7 +16,7 @@ function createController(map, dataSet) {
     .map(data => {
       return createBus(map, data, route);
     });
-
+  
   const controllerProps = {
     buses
   };

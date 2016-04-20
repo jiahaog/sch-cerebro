@@ -4,7 +4,6 @@ import findIndex from 'lodash/findIndex';
 import zip from 'lodash/zip';
 import union from 'lodash/union';
 import memoize from 'lodash/memoize';
-import leaflet from 'leaflet';
 import {TIME_STEP_MINUTES, ROUTE_SEARCH_THRESHOLD} from './../config';
 
 function calculateRouteTimings(routeParts, totalDuration) {
@@ -75,9 +74,34 @@ function createRoute() {
     },
     
     draw(map) {
-      const lines = zip(bus2Line, ['red', 'blue']);
-      lines.forEach(([route, color]) => {
-        leaflet.polyline(route, {color}).addTo(map);
+      const lines = zip(bus2Line, ['#E91E63', '#2196F3']);
+      lines.forEach(([route, color], index) => {
+        map.addSource(`routeSource${index}`, {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'LineString',
+              coordinates: route
+            }
+          }
+        });
+
+        map.addLayer({
+          id: `routeId${index}`,
+          type: 'line',
+          source: `routeSource${index}`,
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          paint: {
+            'line-color': color,
+            'line-width': 8,
+            'line-opacity': 0.3
+          }
+        });
       });
     }
   };
