@@ -20,7 +20,7 @@ function createMap() {
     mapbox.accessToken = 'pk.eyJ1IjoiamlhaGFvZyIsImEiOiJjaW02am8wYzAwMmQzdWJtNDkxZ2loY3h4In0.bQweoZxjHwlmx9cZXVQJAA';
     const map = new mapbox.Map({
       container: document.getElementById('mapid'),
-      style: 'mapbox://styles/mapbox/streets-v8',
+      style: 'mapbox://styles/jiahaog/cin9bczac00i0d5m3s86t0j4z',
       attributionControl: true
     });
     map.on('load', () => {
