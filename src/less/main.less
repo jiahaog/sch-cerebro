@@ -1,11 +1,11 @@
 //layout
 
 .header-container {
-  height: 5%;
+  height: 7%;
 }
 
 .main-container {
-  height: 95%;
+  height: 93%;
 }
 
 .map-controls {
@@ -38,6 +38,47 @@
   margin-top: 0;
 }
 
+.navbar-title-words {
+  margin-left: 8px;
+}
+
+.header {
+  background-color: #222;
+}
+
+.map-controls-container {
+  background-color: #313131;
+}
+
+.date-display {
+  color: white;
+}
+
+.control-columns {
+  justify-content: flex-end;
+}
+
+.control-column {
+  padding: 10px;
+}
+
+// bulma overwrite
+
+.button.is-primary {
+  background: #535353;
+}
+.button.is-primary:hover {
+  background: #6F6F6F;
+}
+
+.header .title {
+  color: white;
+}
+
+a.header-item:hover {
+  color: white;
+  opacity: 0.5;
+}
 // slider
 
 input[type=range] {
@@ -45,7 +86,6 @@ input[type=range] {
   -webkit-appearance: none;
 
   /*fix for FF unable to apply focus style bug */
-  border: 1px solid white;
 
   /*required for proper track sizing in FF*/
   width: 300px;
@@ -54,7 +94,7 @@ input[type=range] {
 input[type=range]::-webkit-slider-runnable-track {
   width: 300px;
   height: 5px;
-  background: #ddd;
+  background: #898989;
   border: none;
   border-radius: 3px;
 }
@@ -65,7 +105,7 @@ input[type=range]::-webkit-slider-thumb {
   height: 16px;
   width: 16px;
   border-radius: 50%;
-  background: goldenrod;
+  background: white;
   margin-top: -4px;
 }
 
@@ -90,7 +130,7 @@ input[type=range]::-moz-range-thumb {
   height: 16px;
   width: 16px;
   border-radius: 50%;
-  background: goldenrod;
+  background: white;
 }
 
 /*hide the outline behind the border*/
@@ -129,7 +169,7 @@ input[type=range]::-ms-thumb {
   height: 16px;
   width: 16px;
   border-radius: 50%;
-  background: goldenrod;
+  background: white;
 }
 
 input[type=range]:focus::-ms-fill-lower {
@@ -138,4 +178,8 @@ input[type=range]:focus::-ms-fill-lower {
 
 input[type=range]:focus::-ms-fill-upper {
   background: #ccc;
+}
+
+input {
+  background: none
 }

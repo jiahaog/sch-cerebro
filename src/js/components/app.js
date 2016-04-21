@@ -11,8 +11,9 @@ function app() {
       <header className="header header-container">
         <div className="container">
           <div className="header-left">
-            <a className="header-item" href="#">
-              My Bus Leh?
+            <a className="header-item title" href="#">
+              <i className="fa fa-bus" aria-hidden="true"></i>
+              <span className="navbar-title-words">Cerebro</span>
             </a>
           </div>
           <div className="header-right">
@@ -27,19 +28,21 @@ function app() {
         <div className="map">
           <div id="mapid"></div>
         </div>
-        <div className="container map-controls">
-          <div className="columns v-center">
-            <div className="column">
-              <DateSlider />
-            </div>
-            <div className="column">
-              <StepBackwardButton />
-            </div>
-            <div className="column">
-              <StepForwardButton />
-            </div>
-            <div className="column">
-              <PlayButton />
+        <div className="map-controls-container">
+          <div className="container map-controls">
+            <div className="control-columns v-center">
+              <div className="control-column">
+                <DateSlider />
+              </div>
+              <div className="control-column">
+                <StepBackwardButton />
+              </div>
+              <div className="control-column">
+                <StepForwardButton />
+              </div>
+              <div className="control-column">
+                <PlayButton />
+              </div>
             </div>
           </div>
         </div>

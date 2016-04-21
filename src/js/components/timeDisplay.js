@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 
 function timeDisplay({currentDate}) {
   return (
-    <div>
+    <div className="date-display">
       {currentDate.format("dddd, MMMM Do YYYY, h:mm:ss a")}
     </div>
   );
