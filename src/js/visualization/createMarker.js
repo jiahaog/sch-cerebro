@@ -3,29 +3,43 @@ import {latLngToGeoJsonObject, latLngToGeoJsonPoint} from './../helpers'
 import {Actor, Tween} from 'popmotion';
 
 const MARKER_APPEARANCE = {
-  strokeColor: '#2ca25f',
+  fillColor: '#8BC34A',
   strokeWeight: 3,
-  fillColor: '#4CAF50',
-  radius: 8
+  strokeColor: '#FFFFFF',
+  radius: 6
 };
 
 function createMarker(map, location, id) {
 
   const sourceId = `busSource${id}`;
-  const layerId = `busId${id}`;
+  const layerIds = [`busId${id}`, `busGlowId${id}`];
   map.addSource(sourceId, latLngToGeoJsonObject(location));
 
+  // stroke
   map.addLayer({
-    id: layerId,
+    id: layerIds[0],
     source: sourceId,
     type: 'circle',
     layout: {
       visibility: 'none'
     },
     paint: {
+      'circle-radius': MARKER_APPEARANCE.radius + MARKER_APPEARANCE.strokeWeight,
+      'circle-color': MARKER_APPEARANCE.strokeColor
+    }
+  });
+
+  // fill
+  map.addLayer({
+    "id": layerIds[1],
+    "type": "circle",
+    "source": sourceId,
+    layout: {
+      visibility: 'none'
+    },
+    "paint": {
       'circle-radius': MARKER_APPEARANCE.radius,
-      'circle-color': MARKER_APPEARANCE.fillColor,
-      'circle-opacity': 0.7
+      'circle-color': MARKER_APPEARANCE.fillColor
     }
   });
 
@@ -51,7 +65,10 @@ function createMarker(map, location, id) {
       if (removed) {
         return;
       }
-      map.setLayoutProperty(layerId, 'visibility', 'visible');
+
+      layerIds.forEach(layerId => {
+        map.setLayoutProperty(layerId, 'visibility', 'visible');
+      });
 
       const tween = new Tween({
         values: {
@@ -85,7 +102,9 @@ function createMarker(map, location, id) {
     },
 
     remove() {
-      map.removeLayer(layerId);
+      layerIds.forEach(layerId => {
+        map.removeLayer(layerId);
+      });
       map.removeSource(sourceId);
       removed = true;
     }

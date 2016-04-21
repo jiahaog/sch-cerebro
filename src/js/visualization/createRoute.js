@@ -99,7 +99,7 @@ function createRoute() {
           paint: {
             'line-color': color,
             'line-width': 8,
-            'line-opacity': 0.3
+            'line-opacity': 0.5
           }
         });
       });
