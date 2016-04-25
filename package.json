@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "gulp watch",
     "build": "gulp build",
-    "doctor": "babel-doctor"
+    "deploy": "gulp deploy"
   },
   "author": "",
   "license": "MIT",
@@ -65,7 +65,7 @@
   "description": "Location of Buses in Singapore. In Real Time.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jiahaog/my-bus-leh.git"
+    "url": "git+https://github.com/jiahaog/cerebro.git"
   },
   "keywords": [
     "bus",
@@ -76,7 +76,7 @@
     "app"
   ],
   "bugs": {
-    "url": "https://github.com/jiahaog/my-bus-leh/issues"
+    "url": "https://github.com/jiahaog/cerebro/issues"
   },
-  "homepage": "https://github.com/jiahaog/my-bus-leh#readme"
+  "homepage": "https://github.com/jiahaog/cerebro#readme"
 }
