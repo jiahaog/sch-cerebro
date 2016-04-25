@@ -1,4 +1,0 @@
-export const START_DATE = '2016-04-11T02:00:00.000Z';
-export const END_DATE = '2016-04-11T03:00:00.000Z';
-export const TIME_STEP_MINUTES = 1;
-export const ROUTE_SEARCH_THRESHOLD = 200;
