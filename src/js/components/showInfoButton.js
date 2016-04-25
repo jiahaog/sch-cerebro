@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 
 function showModalButton({onClick}) {
   return (
-    <a className={`button is-primary fa fa-info`} onClick={onClick}>
+    <a className={`fa fa-question-circle navbar-button`} onClick={onClick}>
     </a>
   );
 }
