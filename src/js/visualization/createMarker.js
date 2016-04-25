@@ -9,8 +9,7 @@ const MARKER_APPEARANCE = {
   radius: 6
 };
 
-function createMarker(map, location, id) {
-
+function createMarker(map, location, id, route) {
   const sourceId = `busSource${id}`;
   const layerIds = [`busId${id}`, `busGlowId${id}`];
   map.addSource(sourceId, latLngToGeoJsonObject(location));
@@ -76,7 +75,7 @@ function createMarker(map, location, id) {
           lng: nextLocation[1]
         },
         duration: 1000,
-        ease: 'linear'
+        ease: 'easeInOut'
       });
       actor.start(tween);
 
