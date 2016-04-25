@@ -28,7 +28,7 @@ function visualization(store) {
 
         interval = setInterval(() => {
           store.dispatch(stepTimeForward());
-        }, STEP_MINUTES * 1000);
+        }, STEP_MINUTES * 2000);
       } else {
         clearInterval(interval);
         interval = null;
