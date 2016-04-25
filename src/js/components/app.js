@@ -12,7 +12,7 @@ function app() {
         <div className="container">
           <div className="header-left">
             <a className="header-item title" href="#">
-              <i className="fa fa-bus" aria-hidden="true"></i>
+              <i className="fa fa-eye" aria-hidden="true"></i>
               <span className="navbar-title-words">Cerebro</span>
             </a>
           </div>
