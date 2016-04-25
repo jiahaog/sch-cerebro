@@ -123,7 +123,7 @@ gulp.task('favicon', () => {
 });
 
 gulp.task('build', callback => {
-    runSequence('clean', ['useref', 'js', 'img', 'font', 'svg', 'favicon', 'data'], callback);
+    runSequence('clean', ['useref', 'js', 'fonts', 'svg', 'favicon', 'data'], callback);
 });
 
 gulp.task('data', () => {
@@ -147,11 +147,11 @@ gulp.task('watch', ['browserSync', 'useref', 'fonts', 'img', 'svg', 'favicon', '
     gulp.watch('src/**/*.html', ['useref']);
 });
 
-gulp.task('deploy', () => {
+gulp.task('deploy', ['build'], () => {
     // todo figure out bug why can't I do deploy with ['build'] as a prerequisite
     return gulp.src(['./dist/**/*', './CNAME'])
         .pipe(ghPages({
-            branch: 'master'
+            branch: 'gh-pages'
         }));
 });
 
