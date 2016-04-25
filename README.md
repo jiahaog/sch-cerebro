@@ -47,6 +47,8 @@ We also used data from [BusRouter-SG](https://github.com/cheeaun/busrouter-sg) t
 
 To facilitate the data collection, we deployed a dedicated server on DigitalOcean to query the [Datamall](http://www.mytransport.sg/content/mytransport/home/dataMall.html) API at 1 minute intervals. During this step we also filter bad data, where the coordinates of the buses were undefined, and extract the necessary fields to reduce the size of the payload.
 
+The source for the scraper can be found [here](https://github.com/zweicoder/my-bus-leh-data).
+
 ## Analysis
 
 With the data that we have, it was difficult to interpolate the markers denoting buses, especially across bus stops as there was no good way to keep track of the buses across bus stops. As such we augmented the data by calculating the distance between each bus and their next bus stop, using it as a guideline to track for each bus stop the relative locations of the 3 buses over time.
