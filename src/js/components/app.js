@@ -23,9 +23,9 @@ function app() {
             <span className="header-item">
               <TimeDisplay />
             </span>
-            <span className="header-item">
-              <ShowInfoButton />
-            </span>
+            <a className="header-item" href="https://github.com/jiahaog/cerebro" target="_blank">
+              <i className="fa fa-code-fork navbar-button" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
       </header>
