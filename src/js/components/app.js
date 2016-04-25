@@ -4,10 +4,13 @@ import TimeDisplay from '../containers/TimeDisplayContainer';
 import StepForwardButton from './../containers/stepForwardButtonContainer';
 import StepBackwardButton from './../containers/stepBackwardButtonContainer';
 import PlayButton from './../containers/playButtonContainer';
+import InfoModal from './../containers/infoModalContainer';
+import ShowInfoButton from './../containers/showInfoButtonContainer';
 
 function app() {
   return (
     <div className="full-height">
+      <InfoModal/>
       <header className="header header-container">
         <div className="container">
           <div className="header-left">
@@ -19,6 +22,9 @@ function app() {
           <div className="header-right">
             <span className="header-item">
               <TimeDisplay />
+            </span>
+            <span className="header-item">
+              <ShowInfoButton />
             </span>
           </div>
         </div>

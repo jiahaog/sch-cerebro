@@ -1,11 +1,12 @@
-import {CHANGE_TIME, STEP_TIME_FORWARD, STEP_TIME_BACKWARD, TOGGLE_PLAYBACK} from './../actions';
+import {CHANGE_TIME, STEP_TIME_FORWARD, STEP_TIME_BACKWARD, TOGGLE_PLAYBACK, TOGGLE_INFO} from './../actions';
 import {START_DATE} from './../config';
 import moment from 'moment';
 
 const INITIAL_STATE = {
   startDate: moment(new Date(START_DATE)),
   date: moment(new Date(START_DATE)),
-  isPlayingBack: false
+  isPlayingBack: false,
+  isInfoModalOpen: false
 };
 
 function timeStep(currentDate, forward) {
@@ -35,6 +36,10 @@ function reducer(state = INITIAL_STATE, action) {
     case TOGGLE_PLAYBACK:
       return Object.assign({}, state, {
         isPlayingBack: !state.isPlayingBack
+      });
+    case TOGGLE_INFO:
+      return Object.assign({}, state, {
+        isInfoModalOpen: !state.isInfoModalOpen
       });
     default:
       return state;

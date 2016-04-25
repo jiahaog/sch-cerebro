@@ -2,6 +2,7 @@ export const CHANGE_TIME = 'CHANGE_TIME';
 export const STEP_TIME_FORWARD = 'STEP_TIME_FORWARD';
 export const STEP_TIME_BACKWARD = 'STEP_TIME_BACKWARD';
 export const TOGGLE_PLAYBACK = 'TOGGLE_PLAYBACK';
+export const TOGGLE_INFO = 'TOGGLE_INFO';
 
 export function changeTime(newTime) {
   return {
@@ -25,5 +26,11 @@ export function stepTimeBackward() {
 export function togglePlayback() {
   return {
     type: TOGGLE_PLAYBACK
+  }
+}
+
+export function toggleInfo() {
+  return {
+    type: TOGGLE_INFO
   }
 }
