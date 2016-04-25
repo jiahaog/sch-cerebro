@@ -95,6 +95,6 @@ The size of our scrapped data is too huge to be bulk loaded by the client. From 
  
 ## Post-Mortem
 
-![Analysis](docs/analysis.svg)
+![Analysis](https://cdn.rawgit.com/jiahaog/cerebro/master/docs/analysis.svg)
 
 In lieu of the problem with missing data, we did an analysis on the density of bus points. The counts represent the number of times buses were found in the hexagon during the query. Assuming that bus stops are well spaced out, we are able to see how the quality of the data differs in various areas. The west side suffers most heavily from this problem, explaining why buses there appear less. The range of the counts is quite big, with most areas being on the low side of the spectrum. This is telling about the inferior quality of the API - the Achilles Heel of Cerebro.
